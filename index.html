@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(blue, red);
+            position: relative;
+            height: 100vh;
+        }
+
+        .buttonall {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            top: 4px;
+            right: 6px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 10px 10px 5px gray;
+            background-color: white;
+            padding: 10px 40px;
+            text-align: center;
+            font-family: sans-serif;
+
+        }
+
+        .modal {
+            display: flex;
+            border: 3px solid white;
+            position: absolute;
+            border-radius: 20px;
+            top: 50%;
+            color: black;
+            background-color: white;
+            z-index: 6;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 5px;
+            right: 5px
+        }
+
+        img {
+            height: 180px;
+            border-radius: 20px;
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0,0.5);
+            backdrop-filter: blur(3px);
+            z-index: 5;
+
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+
+    <button class="show-modal">Show modal 34</button>
+    
+    <div class="buttonall">
+        <button class="button">Show modal 1</button>
+        <button class="button">Show modal 2</button>
+        <button class="button">Show modal 3</button>
+        
+
+
+    </div>
+    <div class="modal hidden">
+        <button class="close-modal" >&times;</button>
+        <div class="card">
+            <!-- <img src="https://feat.az/uploads/posts/2016-12/1483112087_kedi_resmi_44.jpg" alt="">
+            <div class="design">
+                <p style="font-family: sans-serif;font-size: 16px;margin-left: 10px; ">Lorem ipsum dolor sit amet cm fbuerbononsnt se debitis distinctio
+                    hic doloremque adipisci nihil nemo aspernatur consequatur. Modi reiciendis, jknvaw ruvuWM VWRIAVJIOwm vwvuwvo adfveob  rribaerbnealiquam magnam sapiente
+                    officiis quam.
+                <p style="margin-left: 10px;">Sarah Parker
+                <p style="margin-left: 10px;">Software Engineer Google</p>
+            </div> -->
+        </div>
+    </div>
+    
+    <div class="overlay hidden"></div>
+
+
+
+
+
+
+    <script>
+        const modal = document.querySelector('.modal')
+        const btnShowModal = document.querySelectorAll('.button')
+        const btnCloseModal = document.querySelector('.close-modal')
+        const overlay = document.querySelector('.overlay')
+        const card = document.querySelector(".card")
+
+        const users = [
+            {
+                id: 1,
+                name: 'Elvin',
+                surname: 'Zulvuqarli',
+                description: 'lorem ovhahe vaeroijver aefhvaerbv nef vierbnefvhbrnv brvbe rv5eiojh5 twijoyh',
+                image: 'https://feat.az/uploads/posts/2016-12/1483112087_kedi_resmi_44.jpg',
+                work: {
+                    name: 'Developer',
+                    company: 'Google',
+                }
+            },
+            {
+                id: 2,
+                name: 'Rehim',
+                surname: 'zeod',
+                description: 'lorem ovhahe vaeroijver aefhvaerbv nef vierbnefvhbrnv brvbe rv5eiojh5 twijoyh',
+                image: 'https://media.karousell.com/media/photos/products/2019/09/08/whirlpool_ref_refrigerator_around_10_cu_ft_1567954270_64050c9c0',
+                work: {
+                    name: 'Developer',
+                    company: 'Google',
+                }
+            }, 
+            {
+                id: 3,
+                name: 'Rehim',
+                surname: 'zeod',
+                description: 'lorem ovhahe vaeroijver aefhvaerbv nef vierbnefvhbrnv brvbe rv5eiojh5 twijoyh',
+                image: 'https://media.karousell.com/media/photos/products/2019/09/08/whirlpool_ref_refrigerator_around_10_cu_ft_1567954270_64050c9c0',
+                work: {
+                    name: 'Developer',
+                    company: 'Google',
+                }
+            }
+        ]
+
+        const generateMarkup = (user) => {
+            card.innerHTML = ''
+            const markup = `
+            <img src="${user.image}" alt="">
+            <div class="design">
+                <p style="font-family: sans-serif;font-size: 16px;margin-left: 10px; ">${user.description}</p>
+                <p style="margin-left: 10px;">${user.name} ${user.surname} </p>
+                <p style="margin-left: 10px;">${user.work.name} ${user.work.company}</p>
+            </div>
+            `
+            card.insertAdjacentHTML("beforeend" , markup)
+        }
+
+
+
+
+
+        const closeModal = () => {
+            modal.classList.add('hidden')
+            overlay.classList.add('hidden')
+        }
+
+        btnCloseModal.addEventListener('click', closeModal)
+        overlay.addEventListener('click', closeModal)
+
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'Shift' && !modal.classList.contains('hidden')){
+                closeModal()
+            }
+        })
+
+        for(let i=0;i < btnShowModal.length;i++){
+            btnShowModal[i].addEventListener('click', () =>{
+            modal.classList.remove('hidden')
+            overlay.classList.remove('hidden')
+            const user = 
+            generateMarkup(user)
+        })
+        }
+
+        console.log('modal', modal);
+        console.log('btnShowModal', btnShowModal);
+
+
+
+
+    </script>
+</body>
+
+</html>
